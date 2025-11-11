@@ -2,9 +2,6 @@
 
 set -ouex pipefail
 
-# Update system and install packages
-dnf5 update -y
-
 dnf5 install -y zsh git git-lfs gum tmux btop rsync restic rclone syncthing micro godot chibi-scheme chez-scheme sbcl papirus-icon-theme 
 
 dnf5 install -y dnf5-plugins
