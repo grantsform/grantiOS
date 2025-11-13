@@ -1,0 +1,36 @@
+# install all Flatpak apps system-wide, auto-approve
+install-flatpaks:
+    sudo flatpak install --system -y flathub \
+        com.chatterino.chatterino \
+        com.github.Matoking.protontricks \
+        com.github.tchx84.Flatseal \
+        com.github.vladimiry.ElectronMail \
+        com.github.wwmm.easyeffects \
+        com.notesnook.Notesnook \
+        com.obsproject.Studio \
+        com.protonvpn.www \
+        com.ranfdev.DistroShelf \
+        com.valvesoftware.SteamLink \
+        com.vysp3r.ProtonPlus \
+        dev.vencord.Vesktop \
+        im.riot.Riot \
+        io.github.alainm23.planify \
+        io.github.flattool.Warehouse \
+        md.obsidian.Obsidian \
+        net.blockbench.Blockbench \
+        org.blender.Blender \
+        org.chromium.Chromium \
+        org.kde.filelight \
+        org.kde.gwenview \
+        org.kde.haruna \
+        org.kde.kcalc \
+        org.kde.konsole \
+        org.kde.okular \
+        org.kde.yakuake \
+        org.libreoffice.LibreOffice \
+        org.libretro.RetroArch \
+        org.mozilla.Thunderbird \
+        org.mozilla.firefox \
+        org.onlyoffice.desktopeditors \
+        org.signal.Signal \
+        org.videolan.VLC
