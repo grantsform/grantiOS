@@ -39,6 +39,10 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 RUN mkdir -p /tios
 COPY user_files/* /tios/
 
+### SKELETON FILES
+## Copy skeleton files to their respective locations in the image
+COPY skeleton/* /
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
