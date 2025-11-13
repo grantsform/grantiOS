@@ -35,6 +35,10 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
     
+###  MAKE THE GRAN'TIOS DIRECTORY
+RUN mkdir -p /tios
+COPY user_files/* /tios/
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
