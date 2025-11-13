@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://grantsform.github.io/grantiOS/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'GrantiOS'
 publishDir = "../docs"
 
 [markup.goldmark.renderer]
