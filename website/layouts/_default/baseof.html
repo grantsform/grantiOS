@@ -207,10 +207,110 @@
             border: 1px solid #404040;
         }
 
-        .quick-links a:hover {
-            background: #404040;
+        .download-section {
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #2c2c2c;
+            color: #e0e0e0;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #404040;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .download-btn.secondary {
+            background: #1a1a1a;
+            border-color: #333333;
+        }
+
+        .download-btn.primary {
+            padding: 0.5rem 2rem;
+        }
+
+        .atomic-icon {
+            font-size: 1.2em;
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+
+        details summary {
+            position: relative;
+            cursor: pointer;
+            display: block; /* allow margin/padding to behave predictably */
+            padding-bottom: 0.45rem; /* reduce reserved space above arrow */
+        }
+
+        details summary::marker {
+            content: "";
+        }
+
+        details summary::after {
+            content: "▼";
+            position: absolute;
+            top: calc(100% + 6px); /* reduced gap above the arrow */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.2s, top 0.15s;
+            font-size: 0.95em;
+            color: #b0b0b0;
+        }
+
+        details[open] summary::after {
+            transform: translateX(-50%) rotate(180deg);
+            top: calc(100% + 6px);
+        }
+
+        /* give the expanded description a gap beneath the arrow */
+        details[open] > *:not(summary) {
+            margin-top: 2.2rem; /* larger gap so expanded content sits further below the arrow */
+        }
+
+        details {
+            margin-bottom: 2rem;
+        }
+
+        .code-copy {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .code-copy i {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #b0b0b0;
+            font-size: 1.2em;
+        }
+
+        .code-copy:hover i {
             color: #ffffff;
-            border-color: #555555;
+        }
+
+        .copy-feedback {
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
         }
 
         code {
@@ -417,6 +517,64 @@
         .notification-bar button:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        /* centered command: recreated (plain centered monospace text) */
+        .centered-command {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+            word-break: break-word;
+        }
+
+        .centered-command code {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            display: inline !important;
+            color: inherit;
+            font: inherit;
+            white-space: normal;
+        }
+
+        /* command banner box (near-black background, centered white text) */
+        .command-banner-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0 0.5rem 0;
+            padding: 0 20px;
+        }
+
+        .command-banner-box {
+            background: #0b0b0b; /* near-black */
+            color: #ffffff;
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: inline-block;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            text-align: center;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        .command-banner-box code {
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            white-space: pre-wrap;
+            /* thin grey outline around the command for better visibility */
+            border: 1px solid rgba(128, 128, 128, 0.45);
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -426,6 +584,7 @@
             <button id="close-notification">&times;</button>
         </div>
     </div>
+
 
     <nav>
         <div class="container">
@@ -495,6 +654,15 @@
     <script>
         document.getElementById('close-notification').addEventListener('click', function() {
             document.getElementById('notification-bar').style.display = 'none';
+        });
+
+        document.querySelectorAll('.code-copy').forEach(function(el) {
+            el.addEventListener('click', function() {
+                const code = el.querySelector('code');
+                if (code) {
+                    navigator.clipboard.writeText(code.textContent.trim());
+                }
+            });
         });
     </script>
 </body>

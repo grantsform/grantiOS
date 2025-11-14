@@ -11,22 +11,40 @@ GrantiOS is a custom Linux distribution based on the Fedora Atomic stack, tailor
 ## Quick Start
 
 <div class="quick-links">
+  <a href="#install">Install</a>
   <a href="#rebase">Rebase</a>
-  <a href="#downloads">Downloads</a>
-  <a href="#docs">Documentation</a>
+  <a href="#readme">Readme</a>
+  <a href="#docs">Docs</a>
+  <a href="#faq">FAQs</a>
   <a href="#gallery">Gallery</a>
-  <a href="#faq">FAQ</a>
+</div>
+
+## Install
+
+We plan to have a dedicated ISO image at some point, but for now GrantiOS is based on the Fedora Atomic KDE image.
+
+<div class="download-section">
+  <a href="https://www.fedoraproject.org/atomic-desktops/kinoite/" target="_blank" class="download-btn">Learn About</a>
+  <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/43/Kinoite/x86_64/iso/Fedora-Kinoite-ostree-x86_64-43-1.6.iso" class="download-btn primary">Download <span class="atomic-icon">⚛</span></a>
 </div>
 
 ## Rebase
 
-To rebase to GrantiOS, you need to be on a Fedora Atomic based system. With root or sudo privileges, run:
+To rebase to GrantiOS, you need to be on a Fedora Atomic based system. With root or sudo privileges, run the appropriate image switch command for your system.
 
-```bash
-bootc switch ghcr.io/grantsform/grantios
-```
+<div class="command-banner-wrapper" aria-hidden="false">
+  <div class="command-banner-box" role="status" aria-label="installation command">
+    <code>sudo bootc switch ghcr.io/grantsform/grantios</code>
+  </div>
+</div>
 
 Then reboot to stage the changes.
+
+## Readme
+
+<details>
+
+<summary>⏺⏺⏺</summary>
 
 ## Overview
 
@@ -51,6 +69,18 @@ This project started as a way to create a personalized Linux experience based on
 ## Philosophy
 
 ...
+
+</details>
+
+## Docs
+
+<details>
+
+<summary>Vestibulum Initium</summary>
+
+Vestibulum ante primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer non urna at sapien facilisis gravida. Aenean vel nisl sit amet arcu condimentum facilisis. Suspendisse potenti. Praesent ut sem at nibh consequat sollicitudin, sit amet volutpat nunc tempor.
+
+</details>
 
 ---
 

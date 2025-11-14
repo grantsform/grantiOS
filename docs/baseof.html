@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="{{ .Site.LanguageCode }}">
 <head>
-	<meta name="generator" content="Hugo 0.152.2">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | GrantiOS</title>
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -246,8 +245,6 @@
         details summary {
             position: relative;
             cursor: pointer;
-            display: block;  
-            padding-bottom: 0.45rem;  
         }
 
         details summary::marker {
@@ -257,61 +254,75 @@
         details summary::after {
             content: "▼";
             position: absolute;
-            top: calc(100% + 6px);  
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            transition: transform 0.2s, top 0.15s;
-            font-size: 0.95em;
-            color: #b0b0b0;
+            transition: transform 0.2s;
         }
 
         details[open] summary::after {
             transform: translateX(-50%) rotate(180deg);
-            top: calc(100% + 6px);
-        }
-
-         
-        details[open] > *:not(summary) {
-            margin-top: 2.2rem;  
         }
 
         details {
-            margin-bottom: 2rem;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        .code-copy {
-            position: relative;
+        summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem 1.5rem;
             cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #e0e0e0;
+            border-radius: 6px 6px 0 0;
+            transition: background-color 0.2s;
+            user-select: none;
         }
 
-        .code-copy i {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        summary:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #404040;
+            border-radius: 6px 6px 0 0;
+        }
+
+        details > div {
+            padding: 1.5rem;
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+
+        details > div h3 {
+            color: #e0e0e0;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        details > div h4 {
             color: #b0b0b0;
-            font-size: 1.2em;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
 
-        .code-copy:hover i {
-            color: #ffffff;
+        details > div code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
         }
 
-        .copy-feedback {
-            position: absolute;
-            top: 50%;
-            right: 50px;
-            background: #333;
-            color: #fff;
-            padding: 5px 10px;
+        details > div pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
             border-radius: 4px;
-            font-size: 0.9em;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .copy-feedback.show {
-            opacity: 1;
+            overflow-x: auto;
+            margin: 1rem 0;
         }
 
         code {
@@ -519,63 +530,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-         
-        .centered-command {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 1rem 0;
-            color: #e0e0e0;
-            font-family: 'Courier New', monospace;
-            font-size: 1.05rem;
-            word-break: break-word;
-        }
-
-        .centered-command code {
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            border-radius: 0 !important;
-            display: inline !important;
-            color: inherit;
-            font: inherit;
-            white-space: normal;
-        }
-
-         
-        .command-banner-wrapper {
-            display: flex;
-            justify-content: center;
-            margin: 1rem 0 0.5rem 0;
-            padding: 0 20px;
-        }
-
-        .command-banner-box {
-            background: #0b0b0b;  
-            color: #ffffff;
-            padding: 0.9rem 1.2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            display: inline-block;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            text-align: center;
-            max-width: 100%;
-            overflow-wrap: break-word;
-        }
-
-        .command-banner-box code {
-            background: transparent;
-            color: inherit;
-            font: inherit;
-            white-space: pre-wrap;
-             
-            border: 1px solid rgba(128, 128, 128, 0.45);
-            padding: 0.15rem 0.45rem;
-            border-radius: 6px;
-            display: inline-block;
-        }
     </style>
 </head>
 <body>
@@ -586,6 +540,7 @@
         </div>
     </div>
 
+    <!-- centered command intentionally left out of this content file; implemented in layout -->
 
     <nav>
         <div class="container">
@@ -600,65 +555,7 @@
     </nav>
 
     <main class="container">
-        
-<div class="hero">
-    <h1 id="grantios">Granti<span>OS</span></h1>
-<p><strong>Grant&rsquo;s Personal Bootc Image</strong></p>
-<p>GrantiOS is a custom Linux distribution based on the Fedora Atomic stack, tailored for daily use with personal customizations and optimizations.</p>
-<h2 id="quick-start">Quick Start</h2>
-<div class="quick-links">
-  <a href="#install">Install</a>
-  <a href="#rebase">Rebase</a>
-  <a href="#readme">Readme</a>
-  <a href="#docs">Docs</a>
-  <a href="#faq">FAQs</a>
-  <a href="#gallery">Gallery</a>
-</div>
-<h2 id="install">Install</h2>
-<p>We plan to have a dedicated ISO image at some point, but for now GrantiOS is based on the Fedora Atomic KDE image.</p>
-<div class="download-section">
-  <a href="https://www.fedoraproject.org/atomic-desktops/kinoite/" target="_blank" class="download-btn">Learn About</a>
-  <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/43/Kinoite/x86_64/iso/Fedora-Kinoite-ostree-x86_64-43-1.6.iso" class="download-btn primary">Download <span class="atomic-icon">⚛</span></a>
-</div>
-<h2 id="rebase">Rebase</h2>
-<p>To rebase to GrantiOS, you need to be on a Fedora Atomic based system. With root or sudo privileges, run the appropriate image switch command for your system.</p>
-<div class="command-banner-wrapper" aria-hidden="false">
-  <div class="command-banner-box" role="status" aria-label="installation command">
-    <code>sudo bootc switch ghcr.io/grantsform/grantios</code>
-  </div>
-</div>
-<p>Then reboot to stage the changes.</p>
-<h2 id="readme">Readme</h2>
-<details>
-<summary>⏺⏺⏺</summary>
-<h2 id="overview">Overview</h2>
-<p>Built on top of the amazing work from the <a href="https://universal-blue.org/">Ublue</a> and <a href="https://bazzite.gg/">Bazzite</a> communities, GrantiOS provides a stable, atomic desktop experience with carefully selected customizations.</p>
-<blockquote>
-<p><strong>Note:</strong> This is a personal image. While you&rsquo;re welcome to try it, it&rsquo;s not officially supported for third-party use.</p>
-</blockquote>
-<div class="section-divider"></div>
-<h2 id="about-grantios">About GrantiOS</h2>
-<p>GrantiOS is <a href="https://github.com/grantsform">Grant</a>&rsquo;s personal Bootc image - essentially a custom Linux distribution built for daily desktop use.</p>
-<h2 id="origins">Origins</h2>
-<p>This project started as a way to create a personalized Linux experience based on the excellent work of the Fedora Atomic ecosystem. It&rsquo;s heavily inspired by and built upon:</p>
-<ul>
-<li><strong><a href="https://fedoraproject.org/atomic-desktops/">Fedora Atomic</a></strong> - The base immutable desktop platform</li>
-<li><strong><a href="https://universal-blue.org/">Ublue</a></strong> - Universal Blue&rsquo;s custom images and tooling</li>
-<li><strong><a href="https://bazzite.gg/">Bazzite</a></strong> - Gaming-focused Fedora Atomic images</li>
-</ul>
-<h2 id="philosophy">Philosophy</h2>
-<p>&hellip;</p>
-</details>
-<h2 id="docs">Docs</h2>
-<details>
-<summary>Vestibulum Initium</summary>
-<p>Vestibulum ante primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer non urna at sapien facilisis gravida. Aenean vel nisl sit amet arcu condimentum facilisis. Suspendisse potenti. Praesent ut sem at nibh consequat sollicitudin, sit amet volutpat nunc tempor.</p>
-</details>
-<hr>
-<p><em>For the latest updates, follow <a href="https://github.com/grantsform">@grantsform</a> on GitHub.</em></p>
-
-</div>
-
+        {{ block "main" . }}{{ end }}
     </main>
 
     <footer>
@@ -713,15 +610,6 @@
     <script>
         document.getElementById('close-notification').addEventListener('click', function() {
             document.getElementById('notification-bar').style.display = 'none';
-        });
-
-        document.querySelectorAll('.code-copy').forEach(function(el) {
-            el.addEventListener('click', function() {
-                const code = el.querySelector('code');
-                if (code) {
-                    navigator.clipboard.writeText(code.textContent.trim());
-                }
-            });
         });
     </script>
 </body>
