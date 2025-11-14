@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<meta name="generator" content="Hugo 0.152.2">
+	<meta name="generator" content="Hugo 0.152.2"><script src="/grantiOS/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=grantiOS/livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | GrantiOS</title>
@@ -108,6 +108,15 @@
 
         h1 span {
             color: #666666;
+            animation: pulse 16s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { color: #666666; text-shadow: none; }
+            25% { color: #666666; text-shadow: none; }
+            50% { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+            75% { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+            100% { color: #666666; text-shadow: none; }
         }
 
         h2 {

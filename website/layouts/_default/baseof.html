@@ -107,6 +107,15 @@
 
         h1 span {
             color: #666666;
+            animation: pulse 16s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { color: #666666; text-shadow: none; }
+            25% { color: #666666; text-shadow: none; }
+            50% { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+            75% { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+            100% { color: #666666; text-shadow: none; }
         }
 
         h2 {
