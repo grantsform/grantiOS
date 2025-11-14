@@ -66,6 +66,9 @@ This project started as a way to create a personalized Linux experience based on
 - **[Ublue](https://universal-blue.org/)** - Universal Blue's custom images and tooling
 - **[Bazzite](https://bazzite.gg/)** - Gaming-focused Fedora Atomic images
 
+## Intentions
+This is a stop-gap, personal solution that I'm hoping I can learn enough from to get a good understanding of the bootc ecosystem to reasonably start working on / maintaining [GateLinux](https://github.com/gatelinux) and my Spatial-Computing Distro built around Godot, [UF-OS](https://github.com/uf-os). 
+
 ## Philosophy
 
 ...
