@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<meta name="generator" content="Hugo 0.147.8">
+	<meta name="generator" content="Hugo 0.152.2">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | GrantiOS</title>
@@ -324,9 +324,56 @@
         .footer-bottom a:hover {
             color: #d0d0d0;
         }
+
+        .notification-bar {
+            background: #222222;
+            color: #e0e0e0;
+            padding: 10px 0;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .notification-bar .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .notification-bar p {
+            margin: 0;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .notification-bar button {
+            background: none;
+            border: none;
+            color: #e0e0e0;
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .notification-bar button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
+    <div id="notification-bar" class="notification-bar">
+        <div class="container">
+            <p>This is a pre-release version. Do not use for anything serious. Absolutely zero warranty or responsibility assumed by <a href="https://github.com/grantsform" target="_blank">@grantsform</a>.</p>
+            <button id="close-notification">&times;</button>
+        </div>
+    </div>
+
     <nav>
         <div class="container">
             <div class="logo">
@@ -355,7 +402,8 @@
 <h2 id="overview">Overview</h2>
 <p>Built on top of the amazing work from the <a href="https://universal-blue.org/">Ublue</a> and <a href="https://bazzite.gg/">Bazzite</a> communities, GrantiOS provides a stable, atomic desktop experience with carefully selected customizations.</p>
 <blockquote>
-<p><strong>Note:</strong> This is a personal image. While you&rsquo;re welcome to try it, it&rsquo;s not officially supported for third-party use.</p></blockquote>
+<p><strong>Note:</strong> This is a personal image. While you&rsquo;re welcome to try it, it&rsquo;s not officially supported for third-party use.</p>
+</blockquote>
 <div class="section-divider"></div>
 <h2 id="about-grantios">About GrantiOS</h2>
 <p>GrantiOS is <a href="https://github.com/grantsform">Grant</a>&rsquo;s personal Bootc image - essentially a custom Linux distribution built for daily desktop use.</p>
@@ -423,5 +471,11 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('close-notification').addEventListener('click', function() {
+            document.getElementById('notification-bar').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
