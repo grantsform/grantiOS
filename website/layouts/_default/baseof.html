@@ -155,11 +155,32 @@
         .hero {
             text-align: center;
             padding: 4rem 0;
+            position: relative;
         }
 
         .hero h1 {
             font-size: 5em;
             margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: "\f1ce";
+            font-family: "Font Awesome 6 Free";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 2s linear infinite;
+            opacity: 0.3;
+            font-size: 2em;
+            z-index: -1;
+            color: #666666;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .hero p {
