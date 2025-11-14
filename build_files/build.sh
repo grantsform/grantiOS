@@ -17,7 +17,11 @@ dnf5 config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/
 dnf5 config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo --overwrite
 
 # Install third-party packages
-dnf5 install -y code gh tailscale
+dnf5 install -yx code gh tailscale
+
+# Install Local AI Models Depends
+dnf5 install -yx ollama llama-cpp whisper-cpp # hopefully melotts-cpp gets added upstream too.
+
 
 # Enable Services, Sockets, and Timers
 systemctl enable podman.socket
