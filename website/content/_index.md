@@ -11,11 +11,22 @@ GrantiOS is a custom Linux distribution based on the Fedora Atomic stack, tailor
 ## Quick Start
 
 <div class="quick-links">
+  <a href="#rebase">Rebase</a>
   <a href="#downloads">Downloads</a>
   <a href="#docs">Documentation</a>
   <a href="#gallery">Gallery</a>
   <a href="#faq">FAQ</a>
 </div>
+
+## Rebase
+
+To rebase to GrantiOS, you need to be on a Fedora Atomic based system. With root or sudo privileges, run:
+
+```bash
+bootc switch ghcr.io/grantsform/grantios
+```
+
+Then reboot to stage the changes.
 
 ## Overview
 
