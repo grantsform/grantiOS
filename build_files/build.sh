@@ -19,8 +19,10 @@ dnf5 config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fe
 # Install third-party packages
 dnf5 install -yx code gh tailscale
 
+
+# TODO: Doesn't work, ci build env storage runs out.
 # Install Local AI Models Depends
-dnf5 install -yx ollama llama-cpp whisper-cpp # hopefully melotts-cpp gets added upstream too.
+#dnf5 install -yx ollama llama-cpp whisper-cpp # hopefully melotts-cpp gets added upstream too.
 
 
 # Enable Services, Sockets, and Timers
