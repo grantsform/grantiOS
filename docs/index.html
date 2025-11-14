@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<meta name="generator" content="Hugo 0.152.2">
+	<meta name="generator" content="Hugo 0.152.2"><script src="/grantiOS/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=grantiOS/livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | GrantiOS</title>
@@ -30,13 +30,25 @@
         nav {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            padding: 1rem 0 0.05rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
         }
 
         nav .container {
             display: flex;
             justify-content: space-between;
+            width: 100%;
+            padding: 0 80px;
+            max-width: none;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
             align-items: center;
         }
 
@@ -44,6 +56,8 @@
             color: #e0e0e0;
             text-decoration: none;
             font-weight: bold;
+            padding: 3rem 0;
+            line-height: 1;
         }
 
         .logo a:hover {
@@ -68,6 +82,7 @@
             transition: color 0.3s;
             line-height: 1;
             padding: 0.5rem 0;
+            font-weight: bold;
         }
 
         nav a:hover {
