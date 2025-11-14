@@ -14,7 +14,6 @@ GrantiOS is a custom Linux distribution based on the Fedora Atomic stack, tailor
   <a href="#install">Install</a>
   <a href="#rebase">Rebase</a>
   <a href="#readme">Readme</a>
-  <a href="#docs">Docs</a>
   <a href="#faq">FAQs</a>
   <a href="#gallery">Gallery</a>
 </div>
@@ -75,16 +74,5 @@ This is a stop-gap, personal solution that I'm hoping I can learn enough from to
 
 </details>
 
-## Docs
-
-<details>
-
-<summary>Vestibulum Initium</summary>
-
-Vestibulum ante primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer non urna at sapien facilisis gravida. Aenean vel nisl sit amet arcu condimentum facilisis. Suspendisse potenti. Praesent ut sem at nibh consequat sollicitudin, sit amet volutpat nunc tempor.
-
-</details>
-
----
 
 *For the latest updates, follow [@grantsform](https://github.com/grantsform) on GitHub.*
