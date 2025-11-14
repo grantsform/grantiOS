@@ -41,7 +41,7 @@ Then reboot to stage the changes.
 
 ## Readme
 
-<details>
+<details class="centered-summary">
 
 <summary>⏺⏺⏺</summary>
 
@@ -74,5 +74,34 @@ This is a stop-gap, personal solution that I'm hoping I can learn enough from to
 
 </details>
 
+
+## FAQs {#faq}
+
+Below are some commonly asked questions about GrantiOS. Click a question to expand the answer.
+
+<div class="faq-list">
+
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> What platforms is GrantiOS intended for?</summary>
+
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">GrantiOS is developed primarily as a desktop-focused Bootc image and tested on x86_64 systems using Fedora Atomic-derived tooling. It may work on other platforms with adjustments, but expect platform-specific issues.</span></p>
+</details>
+
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> Can I build or modify the image locally?</summary>
+
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">Yes — the repo contains build helpers and configurations. See the `build_files/` directory for scripts and `skeleton/` for files intended to be copied into the image. Use a VM or isolated environment when testing builds.</span></p>
+</details>
+
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> Where should I report bugs or feature requests?</summary>
+
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">Please open an issue on the repository and include as much detail as possible (OS, steps to reproduce, logs). Pull requests are welcome for fixes or documentation improvements.</span></p>
+</details>
+
+</div>
+
+</br>
+</br>
 
 *For the latest updates, follow [@grantsform](https://github.com/grantsform) on GitHub.*

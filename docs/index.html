@@ -243,31 +243,35 @@
             margin-left: 0.5rem;
         }
 
+         
         details summary {
-            position: relative;
             cursor: pointer;
-            display: block;  
-            padding-bottom: 0.45rem;  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;
+            padding: 0.4rem 0;  
+            gap: 0.75rem;
         }
 
+         
         details summary::marker {
-            content: "";
+            content: none;
         }
 
+         
         details summary::after {
             content: "▼";
-            position: absolute;
-            top: calc(100% + 6px);  
-            left: 50%;
-            transform: translateX(-50%);
-            transition: transform 0.2s, top 0.15s;
+            margin-left: auto;
+            transition: transform 0.2s;
             font-size: 0.95em;
             color: #b0b0b0;
+            display: inline-block;
+            transform-origin: center;
         }
 
+         
         details[open] summary::after {
-            transform: translateX(-50%) rotate(180deg);
-            top: calc(100% + 6px);
+            transform: rotate(180deg);
         }
 
          
@@ -277,6 +281,111 @@
 
         details {
             margin-bottom: 2rem;
+        }
+
+         
+         
+        .faq-list .faq-item {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(200,200,200,0.12);  
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            margin: 0.6em 0;
+        }
+
+        .faq-list .faq-item summary {
+            color: #e0e0e0;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;  
+        }
+
+        .faq-list .faq-item > *:not(summary) {
+            color: #dcdcdc;
+            margin-top: 0.75rem;
+        }
+
+         
+        .faq-label {
+            display: inline-block;
+            width: 48px;  
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95em;
+            line-height: 1;
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            color: #e6e6e6;
+        }
+
+         
+        .faq-label--q {
+            background: rgba(255,255,255,0.02);
+            border: 1.5px solid rgba(200,200,200,0.26);  
+        }
+
+         
+        .faq-label--a {
+            background: rgba(255,255,255,0.01);
+            border: 1.5px solid rgba(200,200,200,0.20);  
+        }
+
+         
+        .faq-list .faq-item summary .faq-label {
+            margin-right: 0.8rem;
+        }
+
+         
+        .faq-list .faq-item summary,
+        .faq-list .faq-item p {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+         
+        .centered-summary summary {
+            display: block !important;  
+            text-align: center;
+            position: relative;
+            padding: 0.6rem 0;
+        }
+
+        .centered-summary summary::marker { content: ""; }
+
+        .centered-summary summary::after {
+            content: "▼";
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.18s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+            font-size: 0.85em;
+            color: #dcdcdc;
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background: #000000;  
+            border: 1px solid #777777;  
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+
+        details.centered-summary[open] summary::after {
+            transform: translateX(-50%) rotate(180deg);
+        }
+
+         
+        .centered-summary summary:hover::after,
+        .centered-summary summary:focus::after {
+            background: #0a0a0a;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.7);
         }
 
         .code-copy {
@@ -628,7 +737,7 @@
 </div>
 <p>Then reboot to stage the changes.</p>
 <h2 id="readme">Readme</h2>
-<details>
+<details class="centered-summary">
 <summary>⏺⏺⏺</summary>
 <h2 id="overview">Overview</h2>
 <p>Built on top of the amazing work from the <a href="https://universal-blue.org/">Ublue</a> and <a href="https://bazzite.gg/">Bazzite</a> communities, GrantiOS provides a stable, atomic desktop experience with carefully selected customizations.</p>
@@ -650,6 +759,24 @@
 <h2 id="philosophy">Philosophy</h2>
 <p>&hellip;</p>
 </details>
+<h2 id="faq">FAQs</h2>
+<p>Below are some commonly asked questions about GrantiOS. Click a question to expand the answer.</p>
+<div class="faq-list">
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> What platforms is GrantiOS intended for?</summary>
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">GrantiOS is developed primarily as a desktop-focused Bootc image and tested on x86_64 systems using Fedora Atomic-derived tooling. It may work on other platforms with adjustments, but expect platform-specific issues.</span></p>
+</details>
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> Can I build or modify the image locally?</summary>
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">Yes — the repo contains build helpers and configurations. See the `build_files/` directory for scripts and `skeleton/` for files intended to be copied into the image. Use a VM or isolated environment when testing builds.</span></p>
+</details>
+<details class="faq-item">
+<summary><span class="faq-label faq-label--q">Q:</span> Where should I report bugs or feature requests?</summary>
+<p><span class="faq-label faq-label--a">A:</span><span class="faq-answer-text">Please open an issue on the repository and include as much detail as possible (OS, steps to reproduce, logs). Pull requests are welcome for fixes or documentation improvements.</span></p>
+</details>
+</div>
+</br>
+</br>
 <p><em>For the latest updates, follow <a href="https://github.com/grantsform">@grantsform</a> on GitHub.</em></p>
 
 </div>

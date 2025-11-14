@@ -242,31 +242,35 @@
             margin-left: 0.5rem;
         }
 
+        /* Place the summary text left and the caret/arrow on the right, on one line. */
         details summary {
-            position: relative;
             cursor: pointer;
-            display: block; /* allow margin/padding to behave predictably */
-            padding-bottom: 0.45rem; /* reduce reserved space above arrow */
+            display: flex; /* layout text and arrow on one line */
+            justify-content: space-between; /* question left, arrow right */
+            align-items: center;
+            padding: 0.4rem 0; /* small vertical padding */
+            gap: 0.75rem;
         }
 
+        /* Reset default marker (some browsers show a disclosure triangle) */
         details summary::marker {
-            content: "";
+            content: none;
         }
 
+        /* Use ::after as the arrow, positioned inline by flexbox */
         details summary::after {
             content: "▼";
-            position: absolute;
-            top: calc(100% + 6px); /* reduced gap above the arrow */
-            left: 50%;
-            transform: translateX(-50%);
-            transition: transform 0.2s, top 0.15s;
+            margin-left: auto;
+            transition: transform 0.2s;
             font-size: 0.95em;
             color: #b0b0b0;
+            display: inline-block;
+            transform-origin: center;
         }
 
+        /* Rotate arrow when open */
         details[open] summary::after {
-            transform: translateX(-50%) rotate(180deg);
-            top: calc(100% + 6px);
+            transform: rotate(180deg);
         }
 
         /* give the expanded description a gap beneath the arrow */
@@ -276,6 +280,114 @@
 
         details {
             margin-bottom: 2rem;
+        }
+
+        /* FAQ container styling to ensure contrast on dark site background.
+           This overrides any light inline backgrounds so the Q&A is readable. */
+        /* FAQ item boxed layout: visible grey outline, padding and consistent dark background */
+        .faq-list .faq-item {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(200,200,200,0.12); /* slightly visible grey outline */
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            margin: 0.6em 0;
+        }
+
+        .faq-list .faq-item summary {
+            color: #e0e0e0;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0; /* spacing handled by the parent .faq-item */
+        }
+
+        .faq-list .faq-item > *:not(summary) {
+            color: #dcdcdc;
+            margin-top: 0.75rem;
+        }
+
+        /* Q/A label boxes */
+        .faq-label {
+            display: inline-block;
+            width: 48px; /* fixed width so Q: and A: align vertically */
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95em;
+            line-height: 1;
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            color: #e6e6e6;
+        }
+
+        /* Question label: slightly stronger border */
+        .faq-label--q {
+            background: rgba(255,255,255,0.02);
+            border: 1.5px solid rgba(200,200,200,0.26); /* slightly thinner: 1.5px */
+        }
+
+        /* Answer label: a touch more muted */
+        .faq-label--a {
+            background: rgba(255,255,255,0.01);
+            border: 1.5px solid rgba(200,200,200,0.20); /* slightly thinner: 1.5px */
+        }
+
+        /* Ensure the label inside the summary doesn't break layout */
+        .faq-list .faq-item summary .faq-label {
+            margin-right: 0.8rem;
+        }
+
+        /* Align summary and answer text so labels line up vertically */
+        .faq-list .faq-item summary,
+        .faq-list .faq-item p {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        /* Keep the special Readme toggle (⏺⏺⏺) centered with the arrow below.
+           This is scoped to the details element with class .centered-summary so
+           FAQ question summaries keep the right-aligned arrow behavior. */
+        .centered-summary summary {
+            display: block !important; /* revert flex for this special case */
+            text-align: center;
+            position: relative;
+            padding: 0.6rem 0;
+        }
+
+        .centered-summary summary::marker { content: ""; }
+
+        .centered-summary summary::after {
+            content: "▼";
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.18s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+            font-size: 0.85em;
+            color: #dcdcdc;
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background: #000000; /* black button background */
+            border: 1px solid #777777; /* grey outline */
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+
+        details.centered-summary[open] summary::after {
+            transform: translateX(-50%) rotate(180deg);
+        }
+
+        /* subtle hover/focus for the circular arrow button */
+        .centered-summary summary:hover::after,
+        .centered-summary summary:focus::after {
+            background: #0a0a0a;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.7);
         }
 
         .code-copy {
