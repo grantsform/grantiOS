@@ -2,7 +2,7 @@
 
 set -ouex pipefail
 
-dnf5 install -y zsh git git-lfs gum glow fzf micro tmux btop rsync restic rclone syncthing hugo godot chibi-scheme chez-scheme sbcl papirus-icon-theme 
+dnf5 install -y zsh git git-lfs gum glow fzf micro tmux btop rsync restic rclone syncthing hugo godot chibi-scheme chez-scheme sbcl papirus-icon-theme ddrescue 
 
 dnf5 install -y dnf5-plugins
 
