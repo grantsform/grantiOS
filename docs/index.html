@@ -712,8 +712,8 @@
         
 <div class="hero">
     <h1 id="grantios">Granti<span>OS</span></h1>
-<p><strong>Grant&rsquo;s Personal Bootc Image</strong></p>
-<p>GrantiOS is a custom Linux distribution based on the Fedora Atomic stack, tailored for daily use with personal customizations and optimizations.</p>
+<p><strong>Grant&rsquo;s Personal Bootc Images</strong></p>
+<p>GrantiOS offers desktop and server variants based on Fedora Atomic.</p>
 <h2 id="quick-start">Quick Start</h2>
 <div class="quick-links">
   <a href="#install">Install</a>
@@ -729,10 +729,17 @@
   <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/43/Kinoite/x86_64/iso/Fedora-Kinoite-ostree-x86_64-43-1.6.iso" class="download-btn primary">Download <span class="atomic-icon">⚛</span></a>
 </div>
 <h2 id="rebase">Rebase</h2>
-<p>To rebase to GrantiOS, you need to be on a Fedora Atomic based system. With root or sudo privileges, run the appropriate image switch command for your system.</p>
+<p>To rebase to GrantiOS, choose the variant for your use case:</p>
+<p><strong>Desktop (Via KDE):</strong></p>
 <div class="command-banner-wrapper" aria-hidden="false">
-  <div class="command-banner-box" role="status" aria-label="installation command">
-    <code>sudo bootc switch ghcr.io/grantsform/grantios</code>
+  <div class="command-banner-box" role="status" aria-label="desktop installation command">
+    <code>sudo bootc switch ghcr.io/grantsform/grantios-desktop</code>
+  </div>
+</div>
+<p><strong>Server (Headless):</strong></p>
+<div class="command-banner-wrapper" aria-hidden="false">
+  <div class="command-banner-box" role="status" aria-label="server installation command">
+    <code>sudo bootc switch ghcr.io/grantsform/grantios-server</code>
   </div>
 </div>
 <p>Then reboot to stage the changes.</p>
@@ -740,13 +747,13 @@
 <details class="centered-summary">
 <summary>⏺⏺⏺</summary>
 <h2 id="overview">Overview</h2>
-<p>Built on top of the amazing work from the <a href="https://universal-blue.org/">Ublue</a> and <a href="https://bazzite.gg/">Bazzite</a> communities, GrantiOS provides a stable, atomic desktop experience with carefully selected customizations.</p>
+<p>Built on top of the amazing work from the <a href="https://universal-blue.org/">Ublue</a> and <a href="https://bazzite.gg/">Bazzite</a> communities, GrantiOS provides stable, atomic experiences with carefully selected customizations across two specialized variants.</p>
 <blockquote>
-<p><strong>Note:</strong> This is a personal image. While you&rsquo;re welcome to try it, it&rsquo;s not officially supported for third-party use.</p>
+<p><strong>Note:</strong> These are personal images. While you&rsquo;re welcome to try them, they&rsquo;re not officially supported for third-party use.</p>
 </blockquote>
 <div class="section-divider"></div>
 <h2 id="about-grantios">About GrantiOS</h2>
-<p>GrantiOS is <a href="https://github.com/grantsform">Grant</a>&rsquo;s personal Bootc image - essentially a custom Linux distribution built for daily desktop use.</p>
+<p>GrantiOS is <a href="https://github.com/grantsform">Grant</a>&rsquo;s personal Bootc images with desktop and server variants.</p>
 <h2 id="origins">Origins</h2>
 <p>This project started as a way to create a personalized Linux experience based on the excellent work of the Fedora Atomic ecosystem. It&rsquo;s heavily inspired by and built upon:</p>
 <ul>
