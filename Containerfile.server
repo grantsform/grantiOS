@@ -2,18 +2,8 @@
 FROM scratch AS ctx
 COPY build_files /
 
-# Desktop Base Image - Gaming and GPU focused (Default)
-FROM ghcr.io/ublue-os/bazzite-nvidia-open:latest
-
-## Other possible base images include:
-# FROM ghcr.io/ublue-os/bazzite:latest
-# FROM ghcr.io/ublue-os/bluefin-nvidia:stable
-# FROM ghcr.io/ublue-os/base-main:latest (used for server variant)
-# 
-# ... and so on, here are more base images
-# Universal Blue Images: https://github.com/orgs/ublue-os/packages
-# Fedora base image: quay.io/fedora/fedora-bootc:41
-# CentOS base images: quay.io/centos-bootc/centos-bootc:stream10
+# Server Base Image - Minimal server focused
+FROM ghcr.io/ublue-os/base-main:latest
 
 ### [IM]MUTABLE /opt
 ## Some bootable images, like Fedora, have /opt symlinked to /var/opt, in order to
@@ -27,14 +17,14 @@ FROM ghcr.io/ublue-os/bazzite-nvidia-open:latest
 # RUN rm /opt && mkdir /opt
 
 ### MODIFICATIONS
-## make modifications desired in your image and install packages by modifying the build-desktop.sh script
-## the following RUN directive does all the things required to run "build-desktop.sh" as recommended.
+## make modifications desired in your image and install packages by modifying the build-server.sh script
+## the following RUN directive does all the things required to run "build-server.sh" as recommended.
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build-desktop.sh
+    /ctx/build-server.sh
     
 ###  MAKE THE GRAN'TIOS DIRECTORY
 RUN mkdir -p /tios

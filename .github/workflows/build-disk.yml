@@ -20,7 +20,9 @@ on:
       - main
     paths:
       - './disk_config/disk.toml'
-      - './disk_config/iso.toml'
+      - './disk_config/iso-desktop.toml'
+      - './disk_config/iso-server.toml' 
+      - './disk_config/iso-gnome.toml'
       - './.github/workflows/build-disk.yml'
 
 env:
@@ -35,11 +37,16 @@ concurrency:
 
 jobs:
   build:
-    name: Build disk images
+    name: Build ${{ matrix.variant.name }} ${{ matrix.disk-type }} disk images
     runs-on: ${{ inputs.platform == 'amd64' && 'ubuntu-24.04' || 'ubuntu-24.04-arm' }}
     strategy:
       fail-fast: false
       matrix:
+        variant:
+          - name: "desktop"
+            image_suffix: "-desktop"
+          - name: "server"
+            image_suffix: "-server"
         disk-type: ["qcow2", "anaconda-iso"]
     permissions:
       contents: read
@@ -55,7 +62,7 @@ jobs:
           DISK_TYPE=$(echo "${{ matrix.disk-type }}" | tr ' ' '-')
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
-          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_NAME=${IMAGE_NAME,,}${{ matrix.variant.image_suffix }}" >> ${GITHUB_ENV}
           echo "DISK_TYPE=${DISK_TYPE}" >> ${GITHUB_ENV}
           echo "USER_UID=${USER_UID}" >> ${GITHUB_ENV}
           echo "USER_GID=${USER_GID}" >> ${GITHUB_ENV}
@@ -82,7 +89,7 @@ jobs:
         uses: osbuild/bootc-image-builder-action@main
         with:
           builder-image: ${{ env.BIB_IMAGE }}
-          config-file: ${{ matrix.disk-type == 'anaconda-iso' && './disk_config/iso.toml' || './disk_config/disk.toml' }}
+          config-file: ${{ matrix.disk-type == 'anaconda-iso' && (matrix.variant.name == 'server' && './disk_config/iso-server.toml' || './disk_config/iso-desktop.toml') || './disk_config/disk.toml' }}
           image: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
           chown: ${{ env.USER_UID }}:${{ env.USER_GID }}
           types: ${{ matrix.disk-type }}

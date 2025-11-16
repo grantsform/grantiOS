@@ -1,4 +1,4 @@
-export image_name := env("IMAGE_NAME", "image-template") # output image name, usually same as repo name, change as needed
+export image_name := env("IMAGE_NAME", "grantios") # output image name, usually same as repo name, change as needed
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
 
@@ -87,6 +87,21 @@ sudoif command *args:
 
 # Build the image using the specified parameters
 build $target_image=image_name $tag=default_tag:
+    #!/usr/env/bash
+
+    BUILD_ARGS=()
+    if [[ -z "$(git status -s)" ]]; then
+        BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
+    fi
+
+    podman build \
+        "${BUILD_ARGS[@]}" \
+        --pull=newer \
+        --tag "${target_image}:${tag}" \
+        .
+
+# Build the desktop image (default - uses bazzite-nvidia-open base)
+build-desktop $target_image=("grantios-desktop") $tag=default_tag:
     #!/usr/bin/env bash
 
     BUILD_ARGS=()
@@ -98,6 +113,23 @@ build $target_image=image_name $tag=default_tag:
         "${BUILD_ARGS[@]}" \
         --pull=newer \
         --tag "${target_image}:${tag}" \
+        --file Containerfile.desktop \
+        .
+
+# Build the server image (uses base-main)
+build-server $target_image=("grantios-server") $tag=default_tag:
+    #!/usr/bin/env bash
+
+    BUILD_ARGS=()
+    if [[ -z "$(git status -s)" ]]; then
+        BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
+    fi
+
+    podman build \
+        "${BUILD_ARGS[@]}" \
+        --pull=newer \
+        --tag "${target_image}:${tag}" \
+        --file Containerfile.server \
         .
 
 # Command: _rootful_load_image
@@ -201,25 +233,73 @@ _rebuild-bib $target_image $tag $type $config: (build target_image tag) && (_bui
 [group('Build Virtal Machine Image')]
 build-qcow2 $target_image=("localhost/" + image_name) $tag=default_tag: && (_build-bib target_image tag "qcow2" "disk_config/disk.toml")
 
+# Build a QCOW2 virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+build-desktop-qcow2 $target_image=("localhost/grantios-desktop") $tag=default_tag: (build-desktop target_image tag) && (_build-bib target_image tag "qcow2" "disk_config/disk.toml")
+
+# Build a QCOW2 virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+build-server-qcow2 $target_image=("localhost/grantios-server") $tag=default_tag: (build-server target_image tag) && (_build-bib target_image tag "qcow2" "disk_config/disk.toml")
+
 # Build a RAW virtual machine image
 [group('Build Virtal Machine Image')]
 build-raw $target_image=("localhost/" + image_name) $tag=default_tag: && (_build-bib target_image tag "raw" "disk_config/disk.toml")
 
+# Build a RAW virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+build-desktop-raw $target_image=("localhost/grantios-desktop") $tag=default_tag: (build-desktop target_image tag) && (_build-bib target_image tag "raw" "disk_config/disk.toml")
+
+# Build a RAW virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+build-server-raw $target_image=("localhost/grantios-server") $tag=default_tag: (build-server target_image tag) && (_build-bib target_image tag "raw" "disk_config/disk.toml")
+
 # Build an ISO virtual machine image
 [group('Build Virtal Machine Image')]
-build-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_build-bib target_image tag "iso" "disk_config/iso.toml")
+build-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_build-bib target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Build an ISO virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+build-desktop-iso $target_image=("localhost/grantios-desktop") $tag=default_tag: (build-desktop target_image tag) && (_build-bib target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Build an ISO virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+build-server-iso $target_image=("localhost/grantios-server") $tag=default_tag: (build-server target_image tag) && (_build-bib target_image tag "iso" "disk_config/iso-server.toml")
 
 # Rebuild a QCOW2 virtual machine image
 [group('Build Virtal Machine Image')]
 rebuild-qcow2 $target_image=("localhost/" + image_name) $tag=default_tag: && (_rebuild-bib target_image tag "qcow2" "disk_config/disk.toml")
 
+# Rebuild a QCOW2 virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+rebuild-desktop-qcow2 $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_rebuild-bib target_image tag "qcow2" "disk_config/disk.toml")
+
+# Rebuild a QCOW2 virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+rebuild-server-qcow2 $target_image=("localhost/grantios-server") $tag=default_tag: && (_rebuild-bib target_image tag "qcow2" "disk_config/disk.toml")
+
 # Rebuild a RAW virtual machine image
 [group('Build Virtal Machine Image')]
 rebuild-raw $target_image=("localhost/" + image_name) $tag=default_tag: && (_rebuild-bib target_image tag "raw" "disk_config/disk.toml")
 
+# Rebuild a RAW virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+rebuild-desktop-raw $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_rebuild-bib target_image tag "raw" "disk_config/disk.toml")
+
+# Rebuild a RAW virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+rebuild-server-raw $target_image=("localhost/grantios-server") $tag=default_tag: && (_rebuild-bib target_image tag "raw" "disk_config/disk.toml")
+
 # Rebuild an ISO virtual machine image
 [group('Build Virtal Machine Image')]
-rebuild-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_rebuild-bib target_image tag "iso" "disk_config/iso.toml")
+rebuild-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_rebuild-bib target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Rebuild an ISO virtual machine image for desktop variant
+[group('Build Virtal Machine Image')]
+rebuild-desktop-iso $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_rebuild-bib target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Rebuild an ISO virtual machine image for server variant
+[group('Build Virtal Machine Image')]
+rebuild-server-iso $target_image=("localhost/grantios-server") $tag=default_tag: && (_rebuild-bib target_image tag "iso" "disk_config/iso-server.toml")
 
 # Run a virtual machine with the specified image type and configuration
 _run-vm $target_image $tag $type $config:
@@ -267,13 +347,37 @@ _run-vm $target_image $tag $type $config:
 [group('Run Virtal Machine')]
 run-vm-qcow2 $target_image=("localhost/" + image_name) $tag=default_tag: && (_run-vm target_image tag "qcow2" "disk_config/disk.toml")
 
+# Run a virtual machine from a desktop QCOW2 image
+[group('Run Virtal Machine')]
+run-desktop-vm-qcow2 $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_run-vm target_image tag "qcow2" "disk_config/disk.toml")
+
+# Run a virtual machine from a server QCOW2 image
+[group('Run Virtal Machine')]
+run-server-vm-qcow2 $target_image=("localhost/grantios-server") $tag=default_tag: && (_run-vm target_image tag "qcow2" "disk_config/disk.toml")
+
 # Run a virtual machine from a RAW image
 [group('Run Virtal Machine')]
 run-vm-raw $target_image=("localhost/" + image_name) $tag=default_tag: && (_run-vm target_image tag "raw" "disk_config/disk.toml")
 
+# Run a virtual machine from a desktop RAW image
+[group('Run Virtal Machine')]
+run-desktop-vm-raw $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_run-vm target_image tag "raw" "disk_config/disk.toml")
+
+# Run a virtual machine from a server RAW image
+[group('Run Virtal Machine')]
+run-server-vm-raw $target_image=("localhost/grantios-server") $tag=default_tag: && (_run-vm target_image tag "raw" "disk_config/disk.toml")
+
 # Run a virtual machine from an ISO
 [group('Run Virtal Machine')]
-run-vm-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_run-vm target_image tag "iso" "disk_config/iso.toml")
+run-vm-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_run-vm target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Run a virtual machine from a desktop ISO
+[group('Run Virtal Machine')]
+run-desktop-vm-iso $target_image=("localhost/grantios-desktop") $tag=default_tag: && (_run-vm target_image tag "iso" "disk_config/iso-desktop.toml")
+
+# Run a virtual machine from a server ISO
+[group('Run Virtal Machine')]
+run-server-vm-iso $target_image=("localhost/grantios-server") $tag=default_tag: && (_run-vm target_image tag "iso" "disk_config/iso-server.toml")
 
 # Run a virtual machine using systemd-vmspawn
 [group('Run Virtal Machine')]
