@@ -2,7 +2,7 @@
 
 set -ouex pipefail
 
-# Install core server packages
+# Install core packages common to both desktop and server
 dnf5 install -y zsh git git-lfs gum glow fzf micro tmux btop rsync restic rclone syncthing hugo sbcl
 
 dnf5 install -y dnf5-plugins

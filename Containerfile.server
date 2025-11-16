@@ -17,14 +17,14 @@ FROM ghcr.io/ublue-os/base-main:latest
 # RUN rm /opt && mkdir /opt
 
 ### MODIFICATIONS
-## make modifications desired in your image and install packages by modifying the build-server.sh script
-## the following RUN directive does all the things required to run "build-server.sh" as recommended.
+## make modifications desired in your image and install packages by modifying the specific-to-server.sh script
+## the following RUN directive does all the things required to run "specific-to-server.sh" as recommended.
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build-server.sh
+    /ctx/specific-to-server.sh
     
 ###  MAKE THE GRAN'TIOS DIRECTORY
 RUN mkdir -p /tios

@@ -1,4 +1,4 @@
-export image_name := env("IMAGE_NAME", "grantios") # output image name, usually same as repo name, change as needed
+export image_name := env("IMAGE_NAME", "grantios")
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
 
@@ -396,7 +396,6 @@ spawn-vm rebuild="0" type="qcow2" ram="6G":
       --network-user-mode \
       --vsock=false --pass-ssh-key=false \
       -i ./output/**/*.{{ type }}
-
 
 # Runs shell check on all Bash scripts
 lint:
